@@ -43,6 +43,8 @@ class TimersDashboard extends React.Component {
     this.setState({
       timers: this.state.timers.concat(t),
     });
+
+    client.createTimer(t);
   };
 
   updateTimer = (attrs) => {
@@ -58,6 +60,8 @@ class TimersDashboard extends React.Component {
         }
       })
     });
+
+    client.updateTimer(attrs);
   };
 
   // returns a new array with the timer object that has
@@ -66,6 +70,10 @@ class TimersDashboard extends React.Component {
     this.setState({
       timers: this.state.timers.filter(t => t.id !== timerId),
     });
+
+    client.deleteTimer(
+      { id: timerId }
+    );
   };
 
   startTimer = (timerId) => {
@@ -82,6 +90,10 @@ class TimersDashboard extends React.Component {
         }
       }),
     });
+
+    client.startTimer(
+      { id: timerId, start: now }
+    );
   };
 
   stopTimer = (timerId) => {
@@ -100,6 +112,10 @@ class TimersDashboard extends React.Component {
         }
       }),
     });
+
+    client.stopTimer(
+      { id: timerId, stop: now }
+    );
   };
 
   render() {
